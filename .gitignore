@@ -45,6 +45,33 @@ venv.bak/
 .DS_Store
 Thumbs.db
 
+# Analysis scripts (keep only essential ones)
+410m_analysis.py
+analyze_checkpoint_evolution.py
+analyze_clusters_checkpoints.py
+analyze_clusters.py
+analyze_global_stats_multi.py
+analyze_global_stats.py
+analyze_neurons_simple.py
+analyze_svp.py
+checkpoints_demo.py
+create_html_visualization.py
+create_matplotlib_style_visualization.py
+demo_individual_peak.py
+demo.py
+example_scraping.py
+extract_text_excerpts.py
+global_analysis.py
+ne_tlk.py
+plot_clusters.py
+scrape_neuroscope_activations.py
+simple_line_plot.py
+stitch_figures.py
+stitch_svp_figures.py
+test_max_activations.py
+test_scraping.py
+visualize_cluster_distances.py
+
 # Large files (optional - you may want to include smaller result files)
 # results.zip
 # *.zip
