@@ -6,7 +6,7 @@ from typing import List, Dict, Any
 
 # Set page config
 st.set_page_config(
-    page_title="Neuron Embeddings Interactive Visualization",
+    page_title="Neuron Evolution - Pythia-70M",
     page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded"
