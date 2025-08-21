@@ -12,6 +12,27 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Force light mode
+st.markdown("""
+<style>
+    .stApp {
+        background-color: white;
+    }
+    .stApp > header {
+        background-color: white;
+    }
+    .stApp > main {
+        background-color: white;
+    }
+    .stSidebar {
+        background-color: #f8f9fa;
+    }
+    .stSidebar > div {
+        background-color: #f8f9fa;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # Custom CSS for better styling
 st.markdown("""
 <style>
@@ -231,8 +252,7 @@ def display_cluster_data(data: Dict[str, Any], is_right_panel: bool = False):
         st.markdown('</div>', unsafe_allow_html=True)
 
 def main():
-    st.title("🧠 Neuron Embeddings Interactive Visualization")
-    st.markdown("Explore how neurons evolve during training across different checkpoints")
+    # Remove title and subtitle
     
     # Load data
     with st.spinner("Loading neuron data..."):
@@ -278,8 +298,8 @@ def main():
         unsafe_allow_html=True
     )
     
-    # Main content
-    col1, col2 = st.columns(2)
+    # Main content - make left panel wider
+    col1, col2 = st.columns([3, 2])  # 3:2 ratio instead of 1:1
     
     with col1:
         st.subheader(f"Checkpoint {checkpoint}")
