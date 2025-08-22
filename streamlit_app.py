@@ -6,7 +6,7 @@ from typing import List, Dict, Any
 
 # Set page config
 st.set_page_config(
-    page_title="Neuron Evolution - Pythia-70M",
+    page_title="Neuron Evolution - Pythia Models",
     page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -83,16 +83,23 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 @st.cache_data
-def load_neuron_data():
-    """Load all neuron data from the results directories"""
+def load_neuron_data(model_name):
+    """Load all neuron data from the results directories for a specific model"""
     all_neuron_data = {}
     available_neurons = []
     
-    # Define paths to search
-    search_paths = [
-        "results",
-        "results/pythia70m"
-    ]
+    # Define paths to search based on model
+    if model_name == "Pythia-70M":
+        search_paths = [
+            "results",
+            "results/pythia70m"
+        ]
+    elif model_name == "Pythia-160M":
+        search_paths = [
+            "results/pythia160m"
+        ]
+    else:
+        return {}, []
     
     for search_path in search_paths:
         if not os.path.exists(search_path):
@@ -254,16 +261,29 @@ def display_cluster_data(data: Dict[str, Any], is_right_panel: bool = False):
 def main():
     # Remove title and subtitle
     
-    # Load data
-    with st.spinner("Loading neuron data..."):
-        all_neuron_data, available_neurons = load_neuron_data()
-    
-    if not available_neurons:
-        st.error("No neuron data found. Please make sure the results directory exists and contains the required files.")
-        return
-    
     # Sidebar controls
     st.sidebar.header("Controls")
+    
+    # Model selector
+    st.sidebar.markdown("**Select Model:**")
+    model_name = st.sidebar.selectbox(
+        "Model:",
+        ["Pythia-70M", "Pythia-160M"],
+        index=0,
+        label_visibility="collapsed"
+    )
+    
+    # Show current model
+    st.sidebar.markdown(f"**Current Model:** {model_name}")
+    st.sidebar.markdown("---")
+    
+    # Load data for selected model
+    with st.spinner(f"Loading {model_name} neuron data..."):
+        all_neuron_data, available_neurons = load_neuron_data(model_name)
+    
+    if not available_neurons:
+        st.error(f"No neuron data found for {model_name}. Please make sure the results directory exists and contains the required files.")
+        return
     
     # Layer and neuron inputs
     col1, col2 = st.sidebar.columns(2)
