@@ -106,20 +106,26 @@ def load_neuron_data(model_name):
             continue
             
         for filename in os.listdir(search_path):
-            if filename.endswith("_pythia70m_ckpt_series.jsonl"):
+            # Check for the appropriate file pattern based on model
+            if model_name == "Pythia-70M" and filename.endswith("_pythia70m_ckpt_series.jsonl"):
                 neuron_id = filename.replace("_pythia70m_ckpt_series.jsonl", "")
-                file_path = os.path.join(search_path, filename)
+            elif model_name == "Pythia-160M" and filename.endswith("_pythia160m_ckpt_series.jsonl"):
+                neuron_id = filename.replace("_pythia160m_ckpt_series.jsonl", "")
+            else:
+                continue
                 
-                try:
-                    with open(file_path, 'r') as f:
-                        data = []
-                        for line in f:
-                            data.append(json.loads(line.strip()))
-                        all_neuron_data[neuron_id] = data
-                        available_neurons.append(neuron_id)
-                except Exception as e:
-                    st.error(f"Error loading {filename}: {e}")
-                    continue
+            file_path = os.path.join(search_path, filename)
+            
+            try:
+                with open(file_path, 'r') as f:
+                    data = []
+                    for line in f:
+                        data.append(json.loads(line.strip()))
+                    all_neuron_data[neuron_id] = data
+                    available_neurons.append(neuron_id)
+            except Exception as e:
+                st.error(f"Error loading {filename}: {e}")
+                continue
     
     return all_neuron_data, sorted(available_neurons)
 
