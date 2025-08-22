@@ -291,12 +291,18 @@ def main():
         st.error(f"No neuron data found for {model_name}. Please make sure the results directory exists and contains the required files.")
         return
     
-    # Layer and neuron inputs
+    # Layer and neuron inputs - dynamic based on model
     col1, col2 = st.sidebar.columns(2)
     with col1:
-        layer = st.number_input("Layer (0-5):", min_value=0, max_value=5, value=0, step=1)
+        if model_name == "Pythia-70M":
+            layer = st.number_input("Layer (0-5):", min_value=0, max_value=5, value=0, step=1)
+        else:  # Pythia-160M
+            layer = st.number_input("Layer (0-11):", min_value=0, max_value=11, value=0, step=1)
     with col2:
-        neuron = st.number_input("Neuron (0-2000, steps of 20):", min_value=0, max_value=2000, value=0, step=20)
+        if model_name == "Pythia-70M":
+            neuron = st.number_input("Neuron (0-2000, steps of 20):", min_value=0, max_value=2000, value=0, step=20)
+        else:  # Pythia-160M
+            neuron = st.number_input("Neuron (0-3060, steps of 60):", min_value=0, max_value=3060, value=0, step=60)
     
     # Construct neuron ID
     current_neuron = f"L{layer}N{neuron}"
