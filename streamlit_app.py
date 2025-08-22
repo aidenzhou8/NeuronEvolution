@@ -103,7 +103,11 @@ def load_neuron_data(model_name):
     
     for search_path in search_paths:
         if not os.path.exists(search_path):
+            st.error(f"Path not found: {search_path}")
             continue
+        
+        st.info(f"Searching in: {search_path}")
+        files_found = 0
             
         for filename in os.listdir(search_path):
             # Check for the appropriate file pattern based on model
@@ -123,9 +127,12 @@ def load_neuron_data(model_name):
                         data.append(json.loads(line.strip()))
                     all_neuron_data[neuron_id] = data
                     available_neurons.append(neuron_id)
+                    files_found += 1
             except Exception as e:
                 st.error(f"Error loading {filename}: {e}")
                 continue
+        
+        st.info(f"Found {files_found} files in {search_path}")
     
     return all_neuron_data, sorted(available_neurons)
 
