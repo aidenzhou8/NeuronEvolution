@@ -103,10 +103,8 @@ def load_neuron_data(model_name):
     
     for search_path in search_paths:
         if not os.path.exists(search_path):
-            st.error(f"Path not found: {search_path}")
             continue
         
-        st.info(f"Searching in: {search_path}")
         files_found = 0
             
         for filename in os.listdir(search_path):
@@ -132,7 +130,8 @@ def load_neuron_data(model_name):
                 st.error(f"Error loading {filename}: {e}")
                 continue
         
-        st.info(f"Found {files_found} files in {search_path}")
+        # Keep this line as it seems to be necessary for functionality
+        st.write(f"Found {files_found} files in {search_path}")
     
     return all_neuron_data, sorted(available_neurons)
 
