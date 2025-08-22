@@ -1,0 +1,4 @@
+checkpoint_step,n_examples,num_clusters,mean_dist,mean_intra,cluster_sizes,elapsed_sec
+3000,1,1,nan,nan,{0: 1},14.80
+13000,6,2,0.7462645769119263,0.6694912314414978,"{0: 5, 1: 1}",12.53
+23000,1,1,nan,nan,{0: 1},12.40
