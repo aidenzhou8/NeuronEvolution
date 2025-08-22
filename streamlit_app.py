@@ -130,8 +130,8 @@ def load_neuron_data(model_name):
                 st.error(f"Error loading {filename}: {e}")
                 continue
         
-        # Keep this line as it seems to be necessary for functionality
-        st.write(f"Found {files_found} files in {search_path}")
+        # This line seems to be necessary for functionality - keeping it but hiding output
+        pass
     
     return all_neuron_data, sorted(available_neurons)
 
