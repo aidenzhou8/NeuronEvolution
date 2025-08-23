@@ -1,3 +1,3 @@
-# Neuron Evolution - Interactive Visualization
+# Neural Network Analysis Tool
 
-An interactive web app to explore how neurons in Pythia-70M and Pythia-160M evolve during pretraining, by extracting highly activating feature clusters at each checkpoint. Deployed on Streamlit at https://neuronevolution.streamlit.app/.
+An interactive web application for exploring neural network behavior during training, featuring analysis of neuron activations and feature clusters across different training checkpoints.
