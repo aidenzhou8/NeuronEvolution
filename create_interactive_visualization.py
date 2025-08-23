@@ -179,7 +179,7 @@ def create_interactive_visualization():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neural Network Analysis Visualization</title>
+    <title>Interactive Neuron Evolution Visualization</title>
     <style>
         body {{
             font-family: 'DejaVu Sans Mono', 'Courier New', monospace;

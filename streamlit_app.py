@@ -6,8 +6,8 @@ from typing import List, Dict, Any
 
 # Set page config
 st.set_page_config(
-    page_title="Neural Network Analysis Tool",
-    page_icon="🔬",
+    page_title="Neuron Evolution - Pythia Models",
+    page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -89,12 +89,12 @@ def load_neuron_data(model_name):
     available_neurons = []
     
     # Define paths to search based on model
-    if model_name == "Model A":
+    if model_name == "Pythia-70M":
         search_paths = [
             "results",
             "results/pythia70m"
         ]
-    elif model_name == "Model B":
+    elif model_name == "Pythia-160M":
         search_paths = [
             "results/pythia160m"
         ]
@@ -109,9 +109,9 @@ def load_neuron_data(model_name):
             
         for filename in os.listdir(search_path):
             # Check for the appropriate file pattern based on model
-            if model_name == "Model A" and filename.endswith("_pythia70m_ckpt_series.jsonl"):
+            if model_name == "Pythia-70M" and filename.endswith("_pythia70m_ckpt_series.jsonl"):
                 neuron_id = filename.replace("_pythia70m_ckpt_series.jsonl", "")
-            elif model_name == "Model B" and filename.endswith("_pythia160m_ckpt_series.jsonl"):
+            elif model_name == "Pythia-160M" and filename.endswith("_pythia160m_ckpt_series.jsonl"):
                 neuron_id = filename.replace("_pythia160m_ckpt_series.jsonl", "")
             else:
                 continue
@@ -280,7 +280,7 @@ def main():
     st.sidebar.markdown("**Select Model:**")
     model_name = st.sidebar.selectbox(
         "Model:",
-        ["Model A", "Model B"],
+        ["Pythia-70M", "Pythia-160M"],
         index=0,
         label_visibility="collapsed"
     )
@@ -300,14 +300,14 @@ def main():
     # Layer and neuron inputs - dynamic based on model
     col1, col2 = st.sidebar.columns(2)
     with col1:
-        if model_name == "Model A":
+        if model_name == "Pythia-70M":
             layer = st.number_input("Layer (0-5):", min_value=0, max_value=5, value=0, step=1)
-        else:  # Model B
+        else:  # Pythia-160M
             layer = st.number_input("Layer (0-11):", min_value=0, max_value=11, value=0, step=1)
     with col2:
-        if model_name == "Model A":
+        if model_name == "Pythia-70M":
             neuron = st.number_input("Neuron (0-2000, steps of 20):", min_value=0, max_value=2000, value=0, step=20)
-        else:  # Model B
+        else:  # Pythia-160M
             neuron = st.number_input("Neuron (0-3060, steps of 60):", min_value=0, max_value=3060, value=0, step=60)
     
     # Construct neuron ID
@@ -348,7 +348,7 @@ def main():
             st.error("No data available for this checkpoint")
     
     with col2:
-        st.subheader("Final Checkpoint")
+        st.subheader("Checkpoint 143000 (Final)")
         final_data = next((d for d in data if d['checkpoint_step'] == 143000), data[-1] if data else None)
         if final_data:
             display_cluster_data(final_data, is_right_panel=True)
