@@ -12,7 +12,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Force light mode
+# Force light mode and hide GitHub repo link
 st.markdown("""
 <style>
     .stApp {
@@ -29,6 +29,11 @@ st.markdown("""
     }
     .stSidebar > div {
         background-color: #f8f9fa;
+    }
+    .css-1jc7ptx, .e1ewe7hr3, .viewerBadge_container__1QSob,
+    .styles_viewerBadge__1yB5_, .viewerBadge_link__1S137,
+    .viewerBadge_text__1JaDK {
+        display: none;
     }
 </style>
 """, unsafe_allow_html=True)
